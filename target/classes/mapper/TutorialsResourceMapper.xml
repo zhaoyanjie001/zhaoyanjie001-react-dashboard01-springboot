@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sm.demo.dao.TutorialsResourceMapper">
+	<resultMap id="BaseResultMap"
+		type="com.sm.demo.domain.TutorialsResource">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="published" jdbcType="CHAR" property="published" />
+	</resultMap>
+	<select id="queryLearnResouceList"
+		resultType="com.sm.demo.domain.TutorialsResource">
+		SELECT * from tutorials where 1=1
+		<!-- <if test="author != null and author!= ''"> and description like CONCAT('%',#{author},'%') 
+			</if> <if test="title != null and title!= ''"> and published like CONCAT('%',#{title},'%') 
+			</if> -->
+		order by id desc
+	</select>
+	<select id="selectTutorialsById"
+		resultType="com.sm.demo.domain.TutorialsResource">
+		SELECT * from tutorials where 1=1
+			and id = #{id}
+		order by id desc
+	</select>
+	<select id="selectTutorialsByName"
+		resultType="com.sm.demo.domain.TutorialsResource">
+		SELECT * from tutorials where 1=1
+		<if test="name != null and name != ''">
+			and title like CONCAT('',#{name},'%')
+		</if>
+		order by id desc
+	</select>
+	<update id="updateDtoTutorialsById">
+		<if test="id != null and id != ''">
+			update tutorials set title = #{name} where 1=1 and id = #{id}
+		</if>
+	</update>
+	<delete id="deleteDtoTutorialsById">
+			delete from tutorials where 1=1 and id = #{id}
+	</delete>
+	<insert id="insertDtoTutorialsById">
+	insert into tutorials(id,description,published,title) value(#{id},#{description},#{published},#{title})
+	</insert>
+	
+	
+</mapper>

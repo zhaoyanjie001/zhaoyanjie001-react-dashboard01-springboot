@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sm.demo.dao.TutorialsSeqResourceMapper">
+	
+	<select id="getTutorialsSeq" resultType="com.sm.demo.domain.TutorialsSeqResource">
+		SELECT next_val from tutorials_seq 
+	</select>
+	<select id="updateTutorialsSeq" resultType="com.sm.demo.domain.TutorialsSeqResource">
+		update tutorials_seq set next_val =#{seq} 
+	</select>
+</mapper>
